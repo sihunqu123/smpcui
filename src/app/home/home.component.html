@@ -1,0 +1,73 @@
+<ng-container *ngIf="isOrphan">
+  <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+</ng-container>
+<!--
+<ng-container>
+  <div class="after"
+    [class.is-orphan]="isOrphan"
+    [class.is-not-orpahn]="!isOrphan"
+    >
+    ddddd
+    <ng-container *ngIf="!isOrphan">
+      kkkkk
+      <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+      ggggg
+    </ng-container>
+    eeeeee
+  </div>
+</ng-container>
+-->
+
+<div class="app-home" *ngIf="!isOrphan">
+  <div class="content">
+    <div class="home-container"
+      [class.home-is-mobile]="mobileQuery.matches"
+      [class.fullscreen]="!isEditMode"
+      [class.not-editmode]="!isEditMode"
+      [class.portal-mode]="isInPortal"
+      [class.standalone-mode]="!isInPortal"
+      *ngIf="shouldRun">
+      <!--
+      <mat-toolbar color="primary" class="home-toolbar" *ngIf="!isInPortal">
+      -->
+      <mat-toolbar color="primary" class="home-toolbar">
+        <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+        <h1 class="home-app-name">WCM社交媒体分享平台</h1>
+        <span class="toolbar-spacer"></span>
+        <div class="toolbar-welcome">
+          <span class="toolbar-username">{{ displayName }}</span>
+          您好!
+        </div>
+        <mat-icon class="toolbar-icon" aria-hidden="false" aria-label="Example heart icon">account_circle</mat-icon>
+        <mat-icon class="toolbar-icon" aria-hidden="false" aria-label="tell your friend">exit_to_app</mat-icon>
+      </mat-toolbar>
+
+      <mat-sidenav-container class="home-sidenav-container"
+                             [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+        <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+           opened=true
+           [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+          <mat-nav-list>
+            <ng-container *ngFor="let nav of fillerNav; let i = index;">
+              <div class="nav-link">
+                <a mat-list-item
+                  routerLink="{{ nav.routerLink }}"
+                  [class.is-active-link]="activeId === nav.id" >
+                  <mat-icon>{{ nav.icon }}</mat-icon>
+                  {{ nav.name }}
+                </a>
+              </div>
+            </ng-container>
+          </mat-nav-list>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+          <div class="sidenav-content">
+            <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+          </div>
+        </mat-sidenav-content>
+      </mat-sidenav-container>
+    </div>
+
+  </div>
+</div>

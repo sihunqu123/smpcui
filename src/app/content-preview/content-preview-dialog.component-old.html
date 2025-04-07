@@ -1,0 +1,68 @@
+<div class="preview-dailog">
+  <div class="preview-dialog-header">
+    <h2 mat-dialog-title class="mat-h2">预览</h2>
+    <mat-form-field appearance="fill" class="map-AT-content" hideRequiredMarker="false">
+      <mat-label>预览模式:</mat-label>
+      <mat-select
+        [(ngModel)]="previewMode" [ngModelOptions]="{standalone: true}"
+        (selectionChange)="changePreviewMOde($event)" required>
+        <mat-optgroup *ngFor="let group of previewOptions" [label]="group.name" [disabled]="group.disabled">
+          <mat-option *ngFor="let item of group.items" [value]="item.value">
+            {{item.viewValue}}
+          </mat-option>
+        </mat-optgroup>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <mat-dialog-content class="preview-dailog-content">
+
+    <button mat-raised-button color="basic" (click)="shareWithATConfig()" cdkFocusInitial>Choose and add</button>
+    <div class="config-column">
+    </div>
+    <div class="preview-column">
+      <mat-tab-group>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">edit</mat-icon>
+            选择映射
+          </ng-template>
+          <div class="config-parent"
+            >
+          </div>
+        </mat-tab>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">remove_red_eye</mat-icon>
+            预览
+          </ng-template>
+          <div class="preview-tab-content">
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+
+    <!--
+    <content-preview
+      [previewItems]="previewItems"
+      [(previewOption)]="previewOption"
+      *ngIf="previewItems"
+      >
+    </content-preview>
+    -->
+  </mat-dialog-content>
+  <mat-dialog-actions align="end" class="preview-actions action-group">
+    <!--
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button (click)="printEnv()">test</button>
+    -->
+    <button mat-raised-button color="basic" [mat-dialog-close]="true" cdkFocusInitial>关闭</button>
+    <button mat-raised-button color="primary" (click)="changeIndex(false)"
+      [disabled]="previewOption.currentIndex <= 0"
+      *ngIf="!previewOption.isList"
+      >上一条</button>
+    <button mat-raised-button color="primary" (click)="changeIndex(true)"
+      [disabled]="previewOption.currentIndex > previewItems.length - 2"
+      *ngIf="!previewOption.isList"
+      >下一条</button>
+  </mat-dialog-actions>
+</div>

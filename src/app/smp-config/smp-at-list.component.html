@@ -1,0 +1,87 @@
+<div class="smpconfig-at-list config-list component-container">
+  <form [formGroup]="formData" class="config-list-form">
+
+    <mat-form-field class="search-form-field" appearance="fill">
+      <mat-label>请至少输入2个字来搜索社交媒体密钥配置</mat-label>
+      <input matInput type="text" [(ngModel)]="paginateArg.queryTxt" (keyup)="onSearchTxtChange($event)" [ngModelOptions]="{standalone: true}">
+      <button *ngIf="paginateArg.queryTxt" matSuffix mat-icon-button aria-label="Clear" (click)="paginateArg.queryTxt=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <div class="config-list-actions action-group">
+      <button mat-raised-button routerLink="/smp-config" >添加新的配置</button>
+      <button mat-raised-button (click)="deleteConfigs(selection.selected)" *ngIf="selection.selected.length" >删除选中的配置</button>
+    </div>
+    <div class="mat-elevation-z8 at-list">
+      <table mat-table #tableSearch [dataSource]="dataSourceSearch" matSort
+        #sortSearch="matSort"
+        (matSortChange)="changeSort($event)"
+        matSortActive="isEnabled" matSortDirection="desc"
+        matSortDisableClear>
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox (change)="$event ? masterToggle() : null"
+                          [checked]="selection.hasValue() && isAllSelected()"
+                          [indeterminate]="selection.hasValue() && !isAllSelected()"
+                          [aria-label]="checkboxLabel()">
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()"
+                          (change)="$event ? selection.toggle(row) : null"
+                          [checked]="selection.isSelected(row)"
+                          [aria-label]="checkboxLabel(row)">
+            </mat-checkbox>
+          </td>
+        </ng-container>
+
+        <!-- title Column -->
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> 配置名称 </th>
+          <td mat-cell *matCellDef="let element" title="{{element.title}}"> {{element.title}} </td>
+        </ng-container>
+
+
+        <!-- mapping Column -->
+        <ng-container matColumnDef="appConfigId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> 社交媒体密钥配置id </th>
+          <td mat-cell *matCellDef="let element" title="{{element.appConfigId}}"> {{element.appConfigId}} </td>
+        </ng-container>
+
+        <!-- mapping Column -->
+        <ng-container matColumnDef="isEnabled">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> 是否启用 </th>
+          <td mat-cell *matCellDef="let element" title="{{element.isEnabled}}">
+              <div class="isEnable-radio">
+                <!--
+                  can only enble smpconfig when it has been saved to DB.
+                -->
+              </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsSearch"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsSearch;"
+          [class.row-disabled]="!row.isEnabled"
+          ></tr>
+      </table>
+
+      <mat-paginator
+        #paginator4Table
+        [length]="paginateArg.total"
+        [pageIndex]="paginateArg.page"
+        [pageSize]="paginateArg.pagesize"
+        [pageSizeOptions]="[20, 50, 100]"
+        (page)="pageChange($event)"
+        showFirstLastButtons></mat-paginator>
+    </div>
+
+  </form>
+
+  <div class="page-action">
+    <button mat-button mat-stroked-button routerLink="/" >返回</button>
+    <button mat-button (click)="printEnv()">test</button>
+  </div>
+</div>
+

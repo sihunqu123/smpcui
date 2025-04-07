@@ -1,0 +1,71 @@
+
+.map-AT-title {
+  width: 100%;
+}
+
+.map-at-title {
+  width: 100%;
+}
+
+.map-at-field {
+  height: 100%;
+}
+
+
+.map-AT-content {
+  width: 100%;
+}
+
+.smpconfig-dialog {
+  overflow: hidden;
+
+  .at-search-form-field {
+    width: 100%;
+  }
+
+  .mat-dialog-content {
+    // max-height: unset !important;
+    max-height: 75vh !important;
+  }
+
+  .at-list-for-selection {
+    width: 100%;
+    height: 300px;
+    max-height: 300px;
+    overflow-y: auto;
+
+    .mat-table {
+      width: 100%;
+
+      .row-is-selected {
+        font: bold;
+        font-weight: bold;
+        background-color: darkgray;
+      }
+    }
+
+  }
+
+  .mat-dialog-actions {
+    margin-bottom: 0;
+  }
+
+  .field-mapping {
+    width: 100%;
+  }
+  .map-AT-title {
+    width: 100%;
+  }
+
+  .map-at-title {
+    width: 100%;
+  }
+
+  .map-at-field {
+    height: 100%;
+  }
+
+  .map-AT-content {
+    width: 100%;
+  }
+}

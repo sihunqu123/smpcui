@@ -1,0 +1,107 @@
+<home activeId="preference" [isOrphan]="isOrphan">
+<ng-template #togglerContentTpl>
+  <div class="preference-scoped-container component-container">
+    <!--
+    <h1 class="component-title">偏好设置</h1>
+    -->
+    <mat-card class="default-ats-card">
+      <mat-card-header >
+        <mat-card-title>社交媒体默认模板配置</mat-card-title>
+        <mat-card-subtitle>非专家模式下用到的默认分享模板配置</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="content">
+        <form [formGroup]="formAT">
+          <!--
+          <ng-template matStepLabel>{{ isProMode ? '选择编辑模板' : '文章类型'}}</ng-template>
+          -->
+          <div class="content-body" >
+            <mat-accordion class="at-headers-align" multi>
+              <ng-container *ngFor="let atMap of scopedPreference?.atMaps; let i=index">
+                <mat-expansion-panel class="at-expansion-panel" [expanded]="openStats[atMap.atId]?.isOpen"
+                  (opened)="openStats[atMap.atId] && openStats[atMap.atId].isOpen = true"
+                  (closed)="openStats[atMap.atId] && openStats[atMap.atId].isOpen = false"
+                  >
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      {{ (effectivePreference?.atMapsDetail && effectivePreference?.atMapsDetail[atMap.atId] && effectivePreference?.atMapsDetail[atMap.atId].title) || atMap.atId }}
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      {{ atMap.atConfigs?.length }} 个分享配置
+                      <div class="at-map-action">
+                        <button mat-raised-button color="primary" *ngIf="atMap.atId === scopedPreference.defaultAT" title="该模板已经是默认模板" disabled="true">默认模板</button>
+                        <button mat-raised-button color="primary" (click)="setDefaultAT($event, atMap.atId)" *ngIf="atMap.atId !== scopedPreference.defaultAT">设为默认模板</button>
+                        <mat-icon (click)="addATConfig($event, atMap.atId)" title="为该模板添加更多配置">add</mat-icon>
+                        <mat-icon (click)="deleteATMap($event, atMap.atId)" title="删除该模板配置">delete</mat-icon>
+                      </div>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <div class="at-select-parent"
+                    >
+                    <atConfigs [atMap]="atMap" [(openStats)]="openStats[atMap.atId] && openStats[atMap.atId].child" [onSubmit]="onSubmit.bind(this)"></atConfigs>
+                  </div>
+                </mat-expansion-panel>
+              </ng-container>
+
+            </mat-accordion>
+            <div class="step-action">
+              <!--
+              <button mat-raised-button color="link" matStepperPrevious>上一步</button>
+              -->
+            </div>
+          </div>
+        </form>
+      </mat-card-content>
+      <mat-card-actions class="blog-actions">
+        <div class="use-global-button">
+          <button mat-raised-button color="primary" (click)="addATMap()">添加其他模板配置</button>
+          <!--
+          <button mat-raised-button color="warn" (click)="useGlobal('atMaps')" *ngIf="scope === 'user'" >清除个人设置/使用全局设置</button>
+        -->
+        </div>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="preview-config-card" *ngIf="false">
+      <mat-card-header >
+        <mat-card-title>预览相关设置</mat-card-title>
+        <mat-card-subtitle>社交媒体分享预览的偏好设置</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="content">
+        <form [formGroup]="formPreview">
+          <!--
+          <ng-template matStepLabel>{{ isProMode ? '选择编辑模板' : '文章类型'}}</ng-template>
+          -->
+          <div class="content-body" >
+            <div class="default-preview-mode"
+              >
+              <mat-form-field appearance="fill" class="preview-mode full-select" hideRequiredMarker="false">
+                <mat-label>默认预览模式:</mat-label>
+                <mat-select
+                  (selectionChange)="changeDefaultPreviewMOde($event)" required
+                  [value]="formPreview.value.defaultPreviewMode"
+                  >
+                  <mat-optgroup *ngFor="let group of previewOptions" [label]="group.name" [disabled]="group.disabled">
+                    <mat-option *ngFor="let item of group.items" [value]="item.value" >
+                      {{item.viewValue}}
+                    </mat-option>
+                  </mat-optgroup>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </form>
+      </mat-card-content>
+      <mat-card-actions class="blog-actions">
+        <div class="use-global-button">
+          <button mat-raised-button color="warn" (click)="useGlobal('defaultPreviewMode')" *ngIf="scope === 'user'" >清除个人设置/使用全局设置</button>
+        </div>
+
+      </mat-card-actions>
+    </mat-card>
+
+
+      <button mat-button (click)="printEnv()" *ngIf="isDebug">test</button>
+
+  </div>
+</ng-template>
+</home>

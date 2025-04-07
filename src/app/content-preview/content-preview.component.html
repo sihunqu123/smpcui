@@ -1,0 +1,180 @@
+<div class="content-preview">
+  <div class="preview-header-container">
+    <p class="preview-header"> 预览 </p>
+  </div>
+  <!--
+    <button mat-button (click)="printEnv()">test</button>
+  -->
+  <ng-container *ngFor="let item of rendered; let i = index;">
+    <ng-container>
+      <mat-divider 
+        *ngIf="previewOption.isList || previewOption.currentIndex === i"
+        ></mat-divider>
+      <!--
+<mat-card class="preview-card">
+  <mat-card-header>
+    <div mat-card-avatar class="header-image"></div>
+    <mat-card-title>{{ displayName }}</mat-card-title>
+    <mat-card-subtitle>20秒以前 </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+      A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+      bred for hunting.
+    </p>
+  </mat-card-content>
+  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of your Icon">
+  <mat-card-actions class="blog-actions">
+    <button mat-button>收藏</button>
+    <button mat-button>转发</button>
+    <button mat-button>评论</button>
+    <button mat-button>赞</button>
+  </mat-card-actions>
+</mat-card>
+      -->
+      <div class="preview-conainer"
+        [class.display-none]="!previewOption.isList && previewOption.currentIndex !== i"
+        >
+        <div class="preview-info">
+          <span class="preview-summary"> {{item.header }} </span>
+          <span clas="preview-font">的预览如下: ( 第{{ i + 1 }}条 / 共{{ rendered.length }}条 ) </span>
+        </div>
+        <div class="preview-row"
+          [class.double-column]="previewOption.isShowPC && previewOption.isShowMobile"
+          [class.single-column]="!previewOption.isShowPC || !previewOption.isShowMobile"
+          [class.single-row]="!previewOption.isList"
+          [class.multi-row]="previewOption.isList"
+          [class.reverse-column]="previewOption.isNeedReverse"
+          >
+          <div class="preview-column-desktop" *ngIf="previewOption.isShowPC">
+            <mat-card class="preview-card">
+              <mat-card-header >
+                <div mat-card-avatar class="header-image"></div>
+                <mat-card-title>{{ displayName }}</mat-card-title>
+                <mat-card-subtitle>20秒以前 </mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content class="content">
+                {{ item.contentField }}
+                <div class="invalid-post-warn" *ngIf="!item.contentField">
+                  <h1>
+                   注意!!!
+                  </h1>
+                  <h2>
+                    发布的正文不能为空, 平台不支持正文为空的文章, 本文章将不会被发布成功!!!
+                  </h2>
+                </div>
+
+                <a href="{{ item.linkURL }}" *ngIf="item.titleField">
+                  {{ item.titleField }}
+                </a>
+                <div class="preview-image {{ item.imageClass }} "
+                  *ngIf="item.imageFields && item.imageFields.length > 0"
+                  >
+                  <ng-container *ngFor="let imageField of item.imageFields; let i=index">
+                    <img src="{{ imageField }}" *ngIf="i < 10" />
+                  </ng-container>
+                  <div class="preview-more-cover" *ngIf="item.imageFields && item.imageFields.length > 9">
+                    +{{ item.imageFields.length - 9 }}
+                  </div>
+                </div>
+                <div class="preview-video" *ngIf="item.videoField">
+                  <video width="500px" height="282px" controls="">
+                    <source
+                      src="{{ item.videoField }}"
+                      type="video/mp4"
+                      autoplay="true"
+                      poster="item.videoCoverField"
+                      preload="true"
+                      >
+                    你的浏览器不支持视频播放
+                  </video>
+                  
+                </div>
+              </mat-card-content>
+              <mat-card-actions class="blog-actions">
+                <button mat-icon-button disabled aria-label="icon button">
+                  <mat-icon>star_border</mat-icon>收藏
+                </button>
+                <button mat-icon-button disabled aria-label="icon button">
+                  <mat-icon>open_in_new</mat-icon>转发
+                </button>
+                <button mat-icon-button disabled aria-label="icon button">
+                  <mat-icon>comment</mat-icon>评论
+                </button>
+                <button mat-icon-button disabled aria-label="icon button">
+                  <mat-icon>thumb_up</mat-icon>赞
+                </button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+
+          <div class="preview-divider" *ngIf="previewOption.isShowMobile && previewOption.isShowPC">
+          </div>
+
+          <div class="preview-column-mobile" *ngIf="previewOption.isShowMobile">
+            <mat-card class="preview-card">
+              <mat-card-header >
+                <div mat-card-avatar class="header-image"></div>
+                <mat-card-title>{{ displayName }}</mat-card-title>
+                <mat-card-subtitle>20秒以前 </mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content class="content">
+                {{ item.contentField }}
+                <div class="invalid-post-warn" *ngIf="!item.contentField">
+                  <h1>
+                   注意!!!
+                  </h1>
+                  <h2>
+                    发布的正文不能为空, 平台不支持正文为空的文章, 本文章将不会被发布成功!!!
+                  </h2>
+                </div>
+
+                <a href="{{ item.linkURL }}" *ngIf="item.titleField">
+                  {{ item.titleField }}
+                </a>
+                <div class="preview-image {{ item.imageClass }} "
+                  *ngIf="item.imageFields && item.imageFields.length > 0"
+                  >
+                  <ng-container *ngFor="let imageField of item.imageFields; let i=index">
+                    <img src="{{ imageField }}" *ngIf="i < 10" />
+                  </ng-container>
+                  <div class="preview-more-cover" *ngIf="item.imageFields && item.imageFields.length > 9">
+                    +{{ item.imageFields.length - 9 }}
+                  </div>
+                </div>
+                <div class="preview-video" *ngIf="item.videoField">
+                  <video width="351px" height="197px" controls="">
+                    <source
+                      src="{{ item.videoField }}"
+                      type="video/mp4"
+                      autoplay="true"
+                      poster="item.videoCoverField"
+                      preload="true"
+                      >
+                    你的浏览器不支持视频播放
+                  </video>
+                  
+                </div>
+              </mat-card-content>
+              <mat-card-actions class="blog-actions">
+                <button mat-icon-button disabled aria-label="icon button">
+                  <mat-icon>open_in_new</mat-icon>转发
+                </button>
+                <button mat-icon-button disabled aria-label="icon button">
+                  <mat-icon>comment</mat-icon>评论
+                </button>
+                <button mat-icon-button disabled aria-label="icon button">
+                  <mat-icon>thumb_up</mat-icon>赞
+                </button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+
+
+    </ng-container>
+  </ng-container>
+
+</div>

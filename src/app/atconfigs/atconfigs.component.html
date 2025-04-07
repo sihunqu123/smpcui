@@ -1,0 +1,62 @@
+<div class="atConfigs">
+  <mat-accordion class="atconfigs-headers-align"  >
+    <ng-container *ngFor="let atConfig of atMap.atConfigs; let i=index">
+      <!--
+      <mat-divider class="atConfig-divider" *ngIf="i > 0" ></mat-divider>
+      -->
+      <mat-expansion-panel class="atConfig-expansion-panel" *ngIf="openStats" 
+           [class.selected-row]="configSelection?.atConfigId === atConfig.atConfigId"
+           [expanded]="openStats[atConfig.atConfigId]?.isOpen"
+           (opened)="openStats[atConfig.atConfigId] && openStats[atConfig.atConfigId].isOpen = true" 
+           (closed)="openStats[atConfig.atConfigId] && openStats[atConfig.atConfigId].isOpen = false" 
+        >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div class="panel-title-div">
+              <div class="view-mode" [class.displayNone]="tmpData.atMapNameMode[atConfig.atConfigId] === 'edit'">
+                {{ atConfig.atConfigName }}  
+                <button mat-icon-button color="basic" (click)="tmpData.atMapNameMode[atConfig.atConfigId] = 'edit'; $event.stopPropagation();" title="重命名"
+                   *ngIf="onSubmit"
+                  >
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </div>
+              <div class="edit-mode" [class.displayNone]="tmpData.atMapNameMode[atConfig.atConfigId] !== 'edit'">
+                  <input matInput maxlength="50" type="text" class="form-control" [(ngModel)]="tmpData.atMapNameNew" [ngModelOptions]="{standalone: true}" required placeholder="新名称" (click)="$event.stopPropagation();">
+                <button mat-icon-button color="basic" (click)="renameATConfig($event, atMap.atId, atConfig.atConfigId, tmpData.atMapNameNew)" title="确定">
+                  <mat-icon >save</mat-icon>
+                </button>
+                <button mat-icon-button color="basic" (click)="tmpData.atMapNameMode[atConfig.atConfigId] = 'view';$event.stopPropagation();" title="取消">
+                  <mat-icon title="取消">cancel</mat-icon>
+                </button>
+              </div>
+            </div>
+          </mat-panel-title>
+          <mat-panel-description>
+            {{ atConfig.WeiBo?.length + atConfig.WeChat?.length + atConfig.Facebook?.length + atConfig.WeCom?.length}} 个分享方式
+            <div class="at-map-action">
+              <button mat-raised-button color="primary" *ngIf="atConfig.atConfigId === atMap.defaultATConfigId" disabled="true" title="该配置已经是此模板的默认配置">该模板的默认配置</button>
+              <button mat-raised-button color="primary" (click)="setDefaultATConfig($event, atConfig.atConfigId)"
+                                        *ngIf="atConfig.atConfigId !== atMap.defaultATConfigId && onSubmit"
+                >设为该模板的默认配置</button>
+              <mat-icon (click)="deleteATConfig($event, atConfig.atConfigId)" title="删除该配置" 
+                  *ngIf="onSubmit"
+                >delete</mat-icon>
+
+              <button mat-raised-button color="primary" (click)="chooseConfig($event, atConfig)"
+                                        *ngIf="configSelection?.atConfigId !== atConfig.atConfigId && !onSubmit"
+                >选择该配置来分享这些文章</button>
+            </div>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="expansion-content"
+          >
+          <!--
+          -->
+          <atConfig [atConfig]="atConfig" [atId]="atMap.atId" [onSubmit]="onSubmit"></atConfig>
+        </div>
+      </mat-expansion-panel>
+    </ng-container>
+  </mat-accordion>
+      <button mat-button (click)="printEnv()" *ngIf="isDebug">atConfigs-test</button>
+</div>

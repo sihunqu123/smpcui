@@ -1,0 +1,122 @@
+/* Global Styles */
+// disable those bank-demo
+// * {
+//   font-family: Arial, Helvetica, sans-serif;
+// }
+// h1 {
+//   color: #264D73;
+//   font-size: 2.5rem;
+// }
+// h2, h3 {
+//   color: #444;
+//   font-weight: lighter;
+// }
+// h3 {
+//   font-size: 1.3rem;
+// }
+// body {
+//   padding: .5rem;
+//   max-width: 1000px;
+//   margin: auto;
+// }
+// @media (min-width: 600px) {
+//   body {
+//     padding: 2rem;
+//   }
+// }
+// body, input[text] {
+//   color: #333;
+//   font-family: Cambria, Georgia, serif;
+// }
+// a {
+//   cursor: pointer;
+// }
+// button {
+//   background-color: #eee;
+//   border: none;
+//   border-radius: 4px;
+//   cursor: pointer;
+//   color: black;
+//   font-size: 1.2rem;
+//   padding: 1rem;
+//   margin-right: 1rem;
+//   margin-bottom: 1rem;
+//   margin-top: 1rem;
+// }
+// button:hover {
+//   background-color: black;
+//   color: white;
+// }
+// button:disabled {
+//   background-color: #eee;
+//   color: #aaa;
+//   cursor: auto;
+// }
+// 
+// /* Navigation link styles */
+// nav a {
+//   padding: 5px 10px;
+//   text-decoration: none;
+//   margin-right: 10px;
+//   margin-top: 10px;
+//   display: inline-block;
+//   background-color: #e8e8e8;
+//   color: #3d3d3d;
+//   border-radius: 4px;
+// }
+// 
+// nav a:hover {
+//   color: white;
+//   background-color:  #42545C;
+// }
+// nav a.active {
+//   background-color: black;
+//   color: white;
+// }
+// hr {
+//   margin: 1.5rem 0;
+// }
+// input[type="text"] {
+//   box-sizing: border-box;
+//   width: 100%;
+//   padding: .5rem;
+// }
+// 
+// html, body { height: 100%; }
+// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+// <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&amp;display=swap" rel="stylesheet">
+@import './css/font-face.scss';
+
+// make the outlined icons work
+// @import url('https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp');
+@import './css/material.scss';
+
+@import './css/approve.scss';
+
+@import './css/common.scss';
+@import './app/home/home.component.scss';
+@import './app/appconfig-list/appconfig-list.component.scss';
+@import './app/appconfig/appconfig.component.scss';
+@import './app/at-map/at-map.component.scss';
+@import './app/at-select/at-select.component.scss';
+@import './app/smp-config/smp-config.component.scss';
+@import './app/smp-config-list/smp-config-list.component.scss';
+@import './app/smpshare/smpshare.component.scss';
+@import './app/content-preview/content-preview.component.scss';
+@import './app/content-preview/content-preview-dialog.component.scss';
+@import './app/util/confirm/confirm.component.scss';
+@import './app/preference/preference.component.scss';
+@import './app/preference/preference-scoped.component.scss';
+@import './app/share-config/weibo-config.component.scss';
+@import './app/share-config/wechat-config.component.scss';
+@import './app/share-config/facebook-config.component.scss';
+@import './app/atconfig/atconfig.component.scss';
+@import './app/atconfigs/atconfigs.component.scss';
+@import './app/content-preview/preview-wechat.component.scss';
+@import './app/content-preview/preview-weibo.component.scss';
+@import './app/content-preview/preview-facebook.component.scss';
+
+
+

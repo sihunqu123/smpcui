@@ -1,0 +1,26 @@
+<!--
+<nav>
+A routerLink attribute is set to "/heroes", the string that the router matches to the route to HeroesComponent.
+The routerLink is the selector for the RouterLink directive that turns user clicks into router navigations.
+It's another of the public directives in the RouterModule.
+  <a routerLink="/dashboard">Dashboard</a>
+</nav>
+-->
+<!--
+The RouterOutlet is one of the router directives that became available to the AppComponent because AppModule imports AppRoutingModule which exported RouterModule.
+-->
+<!-- 
+<div class="app-body">
+</div>
+-->
+<div class="app-body">
+  <form action="/foo" class="fake-form-to-bypass-authoringPorlet-bug">
+    <router-outlet></router-outlet>
+      <!--
+      <app-publicshare></app-publicshare>
+      -->
+    <!-- 
+    <app-messages></app-messages>
+    -->
+  </form>
+</div>

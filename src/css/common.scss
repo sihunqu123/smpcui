@@ -1,0 +1,115 @@
+
+.mat-paginator {
+  .mat-paginator-page-size-label {
+    white-space: nowrap;
+  }
+}
+
+.row-disabled {
+  background-color: #e4e4e4;
+  >td {
+    color: #a6a0a0;
+  }
+}
+
+.isSingleSelect {
+  cursor: pointer;
+}
+
+.test-class {
+  color: blue;
+}
+
+
+.search-form-field {
+  width: 100%;
+}
+
+.action-group {
+  gap: 10px;
+  display: flex;
+}
+
+.full-select {
+  width: 100%;
+}
+
+
+.mat-table {
+  width: 100%;
+
+  .row-is-selected {
+    font: bold;
+    font-weight: bold;
+    background-color: darkgray;
+  }
+}
+
+/* My Customised */
+.smpconfig-dialog-panel {
+  .mat-dialog-container {
+    overflow-y: clip;
+  }
+}
+
+
+
+
+.component-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .component-title {
+    margin: 0;
+  }
+
+  .page-action {
+    // margin: 35px 0;
+  }
+}
+
+.display-none {
+  display: none;
+}
+
+
+.hide {
+  visibility: hidden !important;
+}
+
+.displayNone {
+  display: none !important;
+}
+
+.highlight-text {
+  color: #3023e9;
+  font-weight: bold;
+}
+
+.preview-dialog-backdropClass {
+  background-color: dimgrey;
+  opacity: 50% !important;
+}
+
+.preview-dialog-panel {
+  // width: 90vw;
+  min-width: 1200px;
+  min-height: 300px;
+  max-height: 98vh;
+
+  .preview-dailog-content {
+    max-height: 80vh;
+  }
+
+  .preview-actions {
+    border-top: solid;
+    border-color: #E0E0E0;
+  }
+}
+
+
+.tab-icon {
+  width: 25px;
+  height: 25px;
+}

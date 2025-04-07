@@ -1,0 +1,80 @@
+.appconfig-container {
+
+  .appconfig-detail-card {
+    > form {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      flex-direction: column;
+      padding: 5px 10px;
+      
+      .isEnable-radio,.platform-radio {
+        align-self: self-start;
+      }
+      .at-list {
+        width: 100%;
+      }
+
+      .appconfig-actions {
+        align-self: self-start;
+        gap: 10px;
+        display: flex;
+      }
+    }
+  }
+
+  .appconfig-enable-card {
+    //margin-top: 20px;
+  }
+
+
+  .mat-card-header {
+    
+    .mat-card-header-text {
+      margin: 0
+    }
+
+  }
+}
+
+.mat-list-icon {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+
+.appconfig-container .mat-form-field {
+  width: 100%;
+  display: block;
+}
+
+.appconfig-container form {
+  margin-bottom: 20px;
+}
+
+.appconfig-container form > * {
+  margin: 5px 0;
+}
+
+.appconfig-container .mat-radio-button {
+  margin: 0 12px;
+}
+
+
+
+.appconfig-right-align {
+  text-align: right;
+}
+
+input.appconfig-right-align::-webkit-outer-spin-button,
+input.appconfig-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.appconfig-right-align {
+  -moz-appearance: textfield;
+}
+
+
+table {
+  width: 100%;
+}

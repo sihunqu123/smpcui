@@ -1,0 +1,263 @@
+<home activeId="smpconfig">
+<ng-template #togglerContentTpl>
+  <div class="smpconfig-container component-container">
+    <h1 class="component-title">社交媒体自动分享</h1>
+
+    <mat-card class="isProMode-enable-card">
+      <mat-card-header >
+        <mat-card-title>专家模式</mat-card-title>
+        <mat-card-subtitle>专家模式允许用户自己选择一些预定义的配置</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="content">
+        <div class="isEnable-radio">
+          <mat-slide-toggle labelPosition="before" [(ngModel)]="isProMode" [ngModelOptions]="{standalone: true}" (change)="toggleIsProMode()">是否启用专家模式</mat-slide-toggle>
+        </div>
+      </mat-card-content>
+      <mat-card-actions class="blog-actions">
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="appconfig-detail-card">
+      <mat-card-header >
+        <mat-card-title>社交媒体自动分享 - 详细配置</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="content">
+        <div class="smpconfig-stepper">
+          <mat-stepper linear #stepper [orientation]="(stepperOrientation | async)!" >
+            <mat-step [stepControl]="formData" label="基本信息" editable="true" linear="true">
+              <form [formGroup]="formData" >
+                <ng-template matStepLabel>基本信息</ng-template>
+                <div class="content-body" >
+
+                  <mat-form-field appearance="outline" hideRequiredMarker="false" floatLabel="auto" hintLabel="Max 32 characters" style="display: none;">
+                    <mat-label>配置id</mat-label>
+                    <input matInput maxlength="50" type="text" class="form-control" formControlName="id" required>
+                  </mat-form-field>
+                  <mat-form-field appearance="outline" hideRequiredMarker="false" floatLabel="auto" hintLabel="Max 200 characters" >
+                    <mat-label>配置名称</mat-label>
+                    <input matInput maxlength="50" type="text" class="form-control" formControlName="title" placeholder="新建配置名" required>
+                  </mat-form-field>
+
+                  <!--
+                  -->
+                  <div class="appconfig-select-parent">
+                    <app-appconfig-list
+                      (appconfigSelect)="onAppconfigSelect($event)"
+                      [limitSMPTypeTo]="isUpdate ? formData.value.appconfig.smpType : ''"
+                      [isSingleSelect]="true"
+                      [isOrphan]=true
+                    ></app-appconfig-list>
+                  </div>
+
+                  <div class="step-action">
+                    <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="formData.invalid">{{ isUpdate ? '更新' : '创建' }}</button>
+                    <button mat-raised-button color="accent"
+                      [disabled]="formData.invalid || !isUpdate"
+                      (click)="onIsProModeChange()"
+                      matStepperNext>下一步</button>
+                    <!--
+                    <button mat-raised-button color="accent" matStepperNext>Remove me!</button>
+                    <button mat-button matStepperNext>Next</button>
+                    -->
+                  </div>
+                </div>
+              </form>
+            </mat-step>
+
+
+            <!--
+            -->
+            <mat-step [stepControl]="formAT" label="选择编辑模板" editable="true" linear="true">
+              <form [formGroup]="formAT" >
+                <ng-template matStepLabel>{{ isProMode ? '选择编辑模板' : '文章类型'}}</ng-template>
+                <div class="content-body" >
+                  <div class="mediaType-select">
+                    <mat-form-field appearance="fill" class="mat-mediaType-select" hideRequiredMarker="false">
+                      <mat-label>分享的类型</mat-label>
+                      <mat-select formControlName="mediaType"
+                          required
+                          [value]="'text'"
+                          (selectionChange)="isProMode ? false : changeATType()"
+                        >
+                        <mat-option
+                          *ngFor="let item of mediaTypeOptions" [value]="item.value"
+                          >
+                          {{item.viewValue}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="at-select-parent"
+                    [class.display-none]="!isProMode"
+                    >
+                    <at-select (selectEvent)="onATSelect($event)"></at-select>
+                  </div>
+
+                  <div class="step-action">
+                    <!--
+                    -->
+                    <button mat-raised-button color="link" matStepperPrevious>上一步</button>
+                    <button mat-raised-button color="accent" [disabled]="formAT.invalid || currentATFields.length === 0" matStepperNext>下一步</button>
+                  </div>
+                </div>
+              </form>
+            </mat-step>
+
+            <mat-step [stepControl]="formMap" label="映射编辑模板域" editable="true" linear="true">
+              <form [formGroup]="formMap" >
+                <ng-template matStepLabel>{{ isProMode ? '映射编辑模板域' : '需要添加回调链接吗?'}}</ng-template>
+                <div class="content-body" >
+                  <div class="map-parent">
+                    <at-map [itemId]="formAT.value.authoringTemplate.itemId"
+                      [(currentATFields)]="currentATFields"
+                      [(mapping)]="formMap.value.mapping"
+                      [mediaType]="formAT.value.mediaType"
+                      [appconfigId]="formData.value.appconfig?.configId"
+                      [isProMode]="isProMode"
+                      #atMap
+                    ></at-map>
+                  </div>
+
+                <ng-template matStepContent>
+                  <div class="step-action">
+                    <button mat-raised-button color="link" matStepperPrevious>上一步/添加更多模板</button>
+                    <button mat-raised-button color="accent"
+                      [class.hide]="isAlreadyAdded()"
+                      [disabled]="!atMap.isValid()"
+                      (click)="addATMapping()"
+                      >添加</button>
+                  </div>
+                </ng-template>
+                </div>
+              </form>
+            </mat-step>
+
+          </mat-stepper>
+        </div>
+
+        <mat-divider *ngIf="this.dataSource.data.length > 0"></mat-divider>
+
+        <div class="at-result" *ngIf="this.dataSource.data.length > 0">
+
+          <div class="smpconfig-at-actions">
+            <h3>已添加的自动分享{{ isProMode ? '模板' : '条目'}}</h3>
+            <button mat-raised-button (click)="deleteSelection()"
+              [class.hide]="selection.selected.length === 0">删除需要自动分享的模板</button>
+          </div>
+          <div class="mat-elevation-z8 at-list">
+            <table mat-table [dataSource]="dataSource" matSort>
+              <!-- Checkbox Column -->
+              <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef>
+                  <mat-checkbox (change)="$event ? masterToggle() : null"
+                                [checked]="selection.hasValue() && isAllSelected()"
+                                [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                [aria-label]="checkboxLabel()">
+                  </mat-checkbox>
+                </th>
+                <td mat-cell *matCellDef="let row">
+                  <mat-checkbox (click)="$event.stopPropagation()"
+                                (change)="$event ? selection.toggle(row) : null"
+                                [checked]="selection.isSelected(row)"
+                                [aria-label]="checkboxLabel(row)">
+                  </mat-checkbox>
+                </td>
+              </ng-container>
+
+              <!-- title Column -->
+              <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> 标题 </th>
+                <td mat-cell *matCellDef="let element"> {{element.at?.title}} </td>
+              </ng-container>
+
+
+              <ng-template [ngIf]="isProMode" [ngIfElse]="mediaTypeColumn">
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> 名称 </th>
+                  <td mat-cell *matCellDef="let element"> {{element.at?.name}} </td>
+                </ng-container>
+
+
+                <!-- lastModified Column -->
+                <ng-container matColumnDef="updated">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> 修改时间 </th>
+                  <td mat-cell *matCellDef="let element"> {{element.at?.updated}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="fieldMapping">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> 域映射 </th>
+                  <td mat-cell *matCellDef="let element" title="{{element.mapping?.contentField}} - 内容"> {{element.mapping?.contentField}} -> 内容</td>
+                </ng-container>
+
+              </ng-template>
+
+              <ng-template #mediaTypeColumn>
+                <!-- mediaType Column -->
+                <ng-container matColumnDef="mediaType">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> 文章类型 </th>
+                  <td mat-cell *matCellDef="let element" title="{{element.mediaType}}"> {{ getI18n(element.mediaType) }}</td>
+                </ng-container>
+
+              </ng-template>
+
+              <tr mat-header-row *matHeaderRowDef="isProMode ? displayedColumnsATResult : displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: isProMode ? displayedColumnsATResult : displayedColumns;"></tr>
+            </table>
+
+            <mat-paginator #paginatorResult [length]="this.dataSource.data.length" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+          </div>
+
+        </div>
+      </mat-card-content>
+      <mat-card-actions class="blog-actions">
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="config-enable-card">
+      <mat-card-header >
+        <mat-card-title>激活</mat-card-title>
+        <mat-card-subtitle>激活当前配置</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="content">
+        <div class="isEnable-radio">
+          <!--
+            can only enble smpconfig when it has been saved to DB.
+          -->
+          <mat-slide-toggle labelPosition="before" [disabled]="!isUpdate" [(ngModel)]="isEnabled" (toggleChange)="toggleEnable()">
+            是否启用
+          </mat-slide-toggle>
+        </div>
+      </mat-card-content>
+      <mat-card-actions class="blog-actions">
+      </mat-card-actions>
+    </mat-card>
+
+    <div class="page-action action-group">
+      <button mat-raised-button color="primary" (click)="onDone();"  [disabled]="!isUpdate">完成</button>
+      <button mat-button mat-stroked-button (click)="onCancel();" routerLink="/smp-config-list" >返回</button>
+      <!--
+      <button mat-button (click)="printEnv()">test</button>
+      -->
+    </div>
+  </div>
+
+
+  <!--
+
+
+      <div class="flex-container">
+          <div  class=container>
+              <label>是否启用这个配置:</label><br>
+              <input name="accountName" size="12" type="text" required #accountName />
+          </div>
+          <div  class=container>
+            <select name="by" onChange="window.location.href=this.value">
+              <option value="true">启用</option>
+              <option value="false">不启用</option>
+            </select>
+          </div>
+      </div>
+  -->
+</ng-template>
+</home>

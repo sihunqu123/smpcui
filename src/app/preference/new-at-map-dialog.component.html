@@ -1,0 +1,14 @@
+<div class="new-at-map-dailog">
+  <h2 mat-dialog-title>
+    {{ title }}
+  </h2>
+
+  <mat-dialog-content class="post-form">
+    <at-select [disabledItems]="disabledItems" (selectEvent)="onATSelect($event)"></at-select>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button [mat-dialog-close]="selectedAT" color="primary" [disabled]="!selectedAT">确定</button>
+    <button mat-raised-button [mat-dialog-close]="false" color="basic">取消</button>
+  </mat-dialog-actions>
+<div>

@@ -1,0 +1,308 @@
+.content-preview {
+
+
+  .header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+
+  .preview-row {
+    display: flex;
+
+    height: fit-content;
+    padding-bottom: 10px;
+    padding-top: 10px;
+
+    &.double-column {
+      justify-content: space-between;
+    }
+
+
+    &.single-column {
+      justify-content: center;
+    }
+
+    &.single-row {
+      // min-height: 664px;
+      min-height: 724px;
+    }
+
+    &.reverse-column {
+      flex-direction: row-reverse;
+    }
+
+    .preview-divider {
+      border-right: ridge;
+    }
+
+    .preview-column-desktop {
+      align-self: center;
+
+       .preview-card {
+        width: 600px;
+
+        .mat-card-header {
+          .header-image {
+            width: 50px;
+            height: 50px;
+          }
+          
+          .mat-card-header-text {
+            margin: 0 10px;
+            .mat-card-title {
+              margin: 2px 0px 3px 0;
+              font-size: 17px;
+            }
+            .mat-card-subtitle {
+              margin: 0;
+            }
+          }
+
+        }
+
+        .content {
+          margin: 0 0px 10px 60px;
+
+          .invalid-post-warn {
+            color: red;
+            h1,h2 {
+              color: red;
+            }
+          }
+
+          .preview-image {
+            width: 500px;
+            margin: 10px 0;
+            overflow: hidden;
+
+            .preview-more-cover {
+              background-color: #7C7C7C;
+              color: white;
+              position: absolute;
+              width: 162px;
+              height: 162px;
+              bottom: 0;
+              right: 0;
+              opacity: 0.8;
+              display: flex;
+              align-items: center !important;
+              justify-content: center !important;
+              font-size: 30px;
+            }
+          }
+
+          .preview-image3,.preview-image6,.preview-image9,.preview-image10 {
+            width: 500px;
+            display: flex;
+            gap: 7px;
+            flex-wrap: wrap;
+            position: relative;
+            img {
+              width: 162px;
+              height: 162px;
+            }
+          }
+
+          .preview-image1 {
+            height: 500px;
+            img {
+              width: 500px;
+              height: 500px;
+            }
+          }
+
+          .preview-image3 {
+            height: 162px;
+          }
+
+          .preview-image6 {
+            height: 331px;
+          }
+          .preview-image9, .preview-image10 {
+            height: 500px;
+          }
+
+        }
+
+        .blog-actions {
+          display: grid !important;
+          grid-template-columns: 1fr 1fr 1fr 1fr;
+          border-top-style: ridge;
+
+          >  :nth-child(n+2) {
+            border-left: outset;
+          }
+
+          button {
+            width: 100%;
+            background-color: white;
+            color: #989898;
+            border-radius: unset;
+            mat-icon {
+              margin-right: 6px;
+            }
+          }
+
+          .preview-video {
+            color: red;
+            margin: 10px 0;
+            width: 500px;
+            height: 282px;
+          }
+        }
+      }
+    }
+
+    .preview-column-mobile {
+      align-self: center;
+
+      .preview-card {
+        width: 370px;
+
+        .mat-card-header {
+          
+          .mat-card-header-text {
+            height: 38.6px;
+            margin-left: .75rem;
+            // margin: 0 10px;
+            .mat-card-title {
+              height: 20px;
+              // margin: 2px 0px 3px 0;
+              margin: 0 0 .375rem 0;
+              font-size: 17px;
+            }
+            .mat-card-subtitle {
+              // margin: 0;
+              height: 18px;
+            }
+          }
+
+        }
+
+        .content {
+          margin: 12px 0px 10px 0px;
+
+          .invalid-post-warn {
+            color: red;
+            h1,h2 {
+              color: red;
+            }
+          }
+
+          .preview-image {
+            width: 370px;
+            margin: 10px 0;
+            overflow: hidden;
+
+            .preview-more-cover {
+              background-color: #7C7C7C;
+              color: white;
+              position: absolute;
+              width: 122px;
+              height: 122px;
+              bottom: 0;
+              right: 0;
+              opacity: 0.8;
+              display: flex;
+              align-items: center !important;
+              justify-content: center !important;
+              font-size: 30px;
+            }
+          }
+
+          .preview-image3,.preview-image6,.preview-image9,.preview-image10 {
+            width: 370px;
+            display: flex;
+            gap: 2px;
+            flex-wrap: wrap;
+            position: relative;
+            img {
+              width: 122px;
+              height: 122px;
+            }
+          }
+
+          .preview-image1 {
+            height: 370px;
+            img {
+              width: 370px;
+              height: 370px;
+            }
+          }
+
+          .preview-image3 {
+            height: 122px;
+          }
+
+          .preview-image6 {
+            height: 246px;
+          }
+          .preview-image9, .preview-image10 {
+            height: 370px;
+          }
+    
+  //      img {
+  //        width: 500px;
+  //      }
+        }
+
+        .blog-actions {
+          display: grid !important;
+          grid-template-columns: 1fr 1fr 1fr;
+          border-top-style: ridge;
+
+          >  :nth-child(n+2) {
+            border-left: outset;
+          }
+
+          button {
+            width: 100%;
+            background-color: white;
+            color: #989898;
+            border-radius: unset;
+            mat-icon {
+              margin-right: 6px;
+            }
+          }
+
+          .preview-video {
+            color: red;
+            margin: 10px 0;
+            width: 351;
+            height: 197px;
+          }
+        }
+      }
+    }
+
+  }
+
+  .header-title {
+    span {
+      background: linear-gradient( 180deg, #57cde2, #c6c9d8);
+      text-align: center;
+      width: 48%;
+    }
+  }
+
+  .preview-info {
+
+    margin: 10px 0;
+    font-size: medium;
+
+    .preview-summary {
+      font-family: cursive;
+      font-weight: 600;
+    }
+
+    .preview-font {
+      color: green;
+    }
+
+  }
+
+
+  .preview-header-container {
+    display: none;
+  }
+}

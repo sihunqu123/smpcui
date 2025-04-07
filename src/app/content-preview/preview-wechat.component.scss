@@ -1,0 +1,134 @@
+.preview-wechat {
+  .preview-row {
+    width: 100%;
+    // display: grid;
+    display: flex;
+    // grid-template-columns: 48% 48%;
+    justify-content: space-between;
+
+    .preview-column-desktop {
+      align-self: unset;
+    }
+
+    .wechat-card {
+      width: 450px;
+      padding-bottom: 10px;
+    }
+
+    .wechat-content {
+      width: 450px;
+      display: block;
+    }
+
+    .cover-card {
+      background-color: #EDEDED;
+    }
+
+    .cover-header {
+      background-color: #EDEDED;
+      display: flex;
+      justify-content: center;
+      justify-content: center;
+      height: 20px;
+      margin-bottom: 5px;
+          
+    }
+
+    .content-card {
+      .mat-card-header-text {
+        margin: 0px;
+        .mat-card-title {
+          font-weight: 600;
+        }
+        .mat-card-subtitle {
+          margin-top: 8px;
+          gap: 10px;
+          display: flex;
+          .header-author {
+            color: #1151b5;
+            font-weight: 540;
+            font-size: medium;
+          }
+            
+
+        }
+      }
+    }
+
+    .content {
+      // background-color:grey;
+      margin-bottom: 0px;
+      .cover-image {
+        width: 450px;
+        height: 250px;
+      }
+
+      img {
+        width: 450px;
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      .preview-video {
+        margin-bottom: 5px;
+      }
+
+      .all-white-cover {
+        background-color: white;
+      }
+
+      .refer-from-footer {
+        width: 100%;
+        display: flex;
+        gap: 15px;
+        margin-top: 25px;
+        a {
+          font-size: small;
+          text-decoration: none;
+        }
+        span {
+          font-size: small;
+          font-weight: 100;
+        }
+      }
+    }
+
+    .blog-actions {
+      display: grid;
+      grid-template-columns: 66px auto 60px 55px;
+      margin: 0px;
+      padding: 0px;
+      color: #1151b5;
+      font-weight: 540;
+      font-size: medium;
+      .mat-button-wrapper {
+        display: flex;
+        mat-icon {
+          align-self: center;
+        }
+      }
+      :nth-child(n+1):nth-child(-n+2) {
+        gap: 3px;
+      }
+      :nth-child(n+3):nth-child(-n+4) {
+        gap: 10px;
+      }
+    }
+
+    .cover-footer {
+      background-color: white;
+      display: flex;
+      margin: -5px 0 10px 0 !important;
+      padding: 5px 0px 5px 12px !important;
+    }
+  }
+
+  .header-title {
+    span {
+      background: linear-gradient( 180deg, #57cde2, #c6c9d8);
+      text-align: center;
+      width: 48%;
+    }
+  }
+
+}

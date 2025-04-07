@@ -1,0 +1,64 @@
+<home activeId="preference">
+<ng-template #togglerContentTpl>
+  <div class="preference-container component-container">
+    <h1 class="component-title">偏好设置</h1>
+    <h3>
+      设定一些系统常规的设置。<br>
+      高级管理员可以通过<span class="highlight-text">全局设定</span> 来为各位操作员设定好通用的设置。<br>
+      各位操作员若想定制化某些行为, 可以在<span class="highlight-text">个人定制化</span>里改变一些设置。
+    </h3>
+
+
+    <mat-tab-group animationDuration="2000ms">
+
+       <mat-tab>
+         <ng-template mat-tab-label>
+           <mat-icon class="example-tab-icon">person</mat-icon>
+           个人定制化(优先级高于全局设定)
+         </ng-template>
+         <app-preference-scoped
+           scope="user"
+           [isOrphan]=true
+           >
+         </app-preference-scoped>
+       </mat-tab>
+
+       <mat-tab>
+         <ng-template mat-tab-label>
+           <mat-icon class="example-tab-icon">language</mat-icon>
+           全局设定(默认生效)
+         </ng-template>
+         <app-preference-scoped
+           scope="platform"
+           [isOrphan]=true
+           >
+         </app-preference-scoped>
+       </mat-tab>
+
+    </mat-tab-group>
+
+    <!--
+    <mat-card class="appconfig-enable-card">
+      <mat-card-header >
+        <mat-card-title>激活</mat-card-title>
+        <mat-card-subtitle>激活当前配置</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="content">
+        <div class="isEnable-radio">
+          <mat-slide-toggle labelPosition="before" [(ngModel)]="isEnabled" (change)="toggleEnable()">是否启用</mat-slide-toggle>
+        </div>
+      </mat-card-content>
+      <mat-card-actions class="blog-actions">
+      </mat-card-actions>
+    </mat-card>
+    -->
+
+    <!--
+    <div class="page-action">
+      <button mat-button mat-stroked-button (click)="onCancel();" routerLink="/appconfig-list" >返回</button>
+    </div>
+    -->
+
+  </div>
+</ng-template>
+</home>

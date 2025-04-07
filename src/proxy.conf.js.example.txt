@@ -1,0 +1,17 @@
+const PROXY_CONFIG = [
+  {
+    context: [
+      "/wps/",
+    ],
+    target: "http://dx.hcl.com:10039/",
+    secure: false,
+    logLevel: "debug",
+    changeOrigin: true,
+    pathRewrite: (path) => {
+      return path;
+    },
+    // headers: {"Authorization": "Basic cm8vdDpub3ZlvGw="}
+  }
+];
+
+module.exports = PROXY_CONFIG;

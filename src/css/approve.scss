@@ -1,0 +1,22 @@
+
+
+// TODO: remove this hack, and use Portal theme instead.
+// hack the layout in portal.
+.wpthemeMainContent > .wpthemeLayoutContainers > .wpthemeInner > table >  tbody {
+  display: flex;
+
+  >tr {
+    width: 100%;
+
+    >td {
+
+      display: flex;
+
+      >table>tbody>tr {
+        display: flex;
+      }
+    }
+
+  }
+}
+

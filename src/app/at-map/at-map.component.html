@@ -1,0 +1,125 @@
+<div class="at-map">
+  <form >
+    <ng-template matStepLabel>映射编辑模板域</ng-template>
+    <div class="at-map-body map-AT-field map-at-field" *ngIf="currentElementsHost === itemId && currentATFields.length > 0"
+      [class.hideDetail]="!isProMode"
+      >
+
+      <mat-slide-toggle labelPosition="before" [disabled]="false" (change)="isProMode ? false : changeNeedURL()" [(ngModel)]="tmpData.needURL" [ngModelOptions]="{standalone: true}" 
+         [class.hide]="isProMode"
+        >
+        是否在文章末尾添加一个链接
+      </mat-slide-toggle>
+
+       <mat-expansion-panel
+         (opened)="tmpData.needURL = true"
+         (closed)="tmpData.needURL = false; mapping.titleField = ''; mapping.linkURL = ''"
+         (click)="false"
+         [expanded]="tmpData.needURL"
+         hideToggle
+         [class.hide]="!isProMode"
+         >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            在文章末尾添加一个链接?
+          </mat-panel-title>
+          <mat-panel-description>
+            <mat-slide-toggle labelPosition="before" [disabled]="false" [(ngModel)]="tmpData.needURL" [ngModelOptions]="{standalone: true}" (click)="false"></mat-slide-toggle>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-form-field appearance="fill" class="map-AT-title" hideRequiredMarker="false">
+          <mat-label>映射模板的域到社交媒体的标题:</mat-label>
+          <mat-select [(ngModel)]="mapping.titleField" [ngModelOptions]="{standalone: true}" required>
+            <mat-option>-- None --</mat-option>
+            <mat-optgroup *ngFor="let group of currentATFields" [label]="group.name" [disabled]="group.disabled">
+              <mat-option *ngFor="let item of group.items" [value]="item.value" [disabled]="item.type !== 'text' && item.type !== 'TextComponent' && item.type !== 'ShortTextComponent'">
+                {{item.viewValue}}
+              </mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="map-AT-title" hideRequiredMarker="false">
+          <mat-label>映射点击社交媒体的标题后跳转的URL:</mat-label>
+          <mat-select [(ngModel)]="mapping.linkURL" [ngModelOptions]="{standalone: true}" required>
+            <mat-option>-- None --</mat-option>
+            <mat-optgroup *ngFor="let group of currentATFields" [label]="group.name" [disabled]="group.disabled">
+              <mat-option *ngFor="let item of group.items" [value]="item.value" [disabled]="item.type !== 'text' && item.type !== 'LinkComponent' && item.type !== 'TextComponent' && item.type !== 'ShortTextComponent'">
+                {{item.viewValue}}
+              </mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
+      </mat-expansion-panel>
+
+
+
+      <mat-form-field appearance="fill" class="map-AT-content" hideRequiredMarker="false">
+        <mat-label>映射模板的域到社交媒体的内容:</mat-label>
+        <mat-select [(ngModel)]="mapping.contentField" [ngModelOptions]="{standalone: true}" required>
+          <mat-option>-- None --</mat-option>
+          <mat-optgroup *ngFor="let group of currentATFields" [label]="group.name" [disabled]="group.disabled">
+            <mat-option *ngFor="let item of group.items" [value]="item.value" [disabled]="item.type !== 'text' && item.type !== 'TextComponent' && item.type !== 'ShortTextComponent'">
+              {{item.viewValue}}
+            </mat-option>
+          </mat-optgroup>
+        </mat-select>
+      </mat-form-field>
+
+      <ng-container *ngIf="mediaType === 'image'">
+        <mat-form-field appearance="fill" class="map-AT-images" hideRequiredMarker="false">
+          <mat-label>映射模板的域到社交媒体的图片:</mat-label>
+          <mat-select [(ngModel)]="mapping.imageFields" [ngModelOptions]="{standalone: true}" multiple required>
+            <mat-option>-- None --</mat-option>
+            <mat-optgroup *ngFor="let group of currentATFields" [label]="group.name" [disabled]="group.disabled">
+              <mat-option *ngFor="let item of group.items" [value]="item.value" [disabled]="item.type !== 'ImageComponent'">
+                {{item.viewValue}}
+              </mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
+      </ng-container>
+
+      <ng-container *ngIf="mediaType === 'video'">
+        <mat-form-field appearance="fill" class="map-AT-video" hideRequiredMarker="false">
+          <mat-label>映射模板的域到社交媒体的视频:</mat-label>
+          <mat-select [(ngModel)]="mapping.videoField" [ngModelOptions]="{standalone: true}" required>
+            <mat-option>-- None --</mat-option>
+            <mat-optgroup *ngFor="let group of currentATFields" [label]="group.name" [disabled]="group.disabled">
+              <mat-option *ngFor="let item of group.items" [value]="item.value" [disabled]="item.type !== 'FileComponent'">
+                {{item.viewValue}}
+              </mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="map-AT-video" hideRequiredMarker="false">
+          <mat-label>映射模板的域到社交媒体的视频标题:</mat-label>
+          <mat-select [(ngModel)]="mapping.videoTitleField" [ngModelOptions]="{standalone: true}" required>
+            <mat-option>-- None --</mat-option>
+            <mat-optgroup *ngFor="let group of currentATFields" [label]="group.name" [disabled]="group.disabled">
+              <mat-option *ngFor="let item of group.items" [value]="item.value" [disabled]="item.type !== 'text' && item.type !== 'TextComponent' && item.type !== 'ShortTextComponent'">
+                {{item.viewValue}}
+              </mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="map-AT-video" hideRequiredMarker="false">
+          <mat-label>映射模板的域到社交媒体的视频封面:</mat-label>
+          <mat-select [(ngModel)]="mapping.videoCoverField" [ngModelOptions]="{standalone: true}" required>
+            <mat-option>-- None --</mat-option>
+            <mat-optgroup *ngFor="let group of currentATFields" [label]="group.name" [disabled]="group.disabled">
+              <mat-option *ngFor="let item of group.items" [value]="item.value" [disabled]="item.type !== 'ImageComponent'">
+                {{item.viewValue}}
+              </mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
+      </ng-container>
+
+    </div>
+  </form>
+<div>
+
+

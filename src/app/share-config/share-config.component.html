@@ -1,0 +1,51 @@
+
+    <mat-expansion-panel #shareTypePriorityUI *ngIf="formData.value?.shareTypePriority">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          发布内容类型的优先级
+        </mat-panel-title>
+        <mat-panel-description>
+          {{ formData.value?.shareTypePriority ? getPrioritySummaryString(formData.value.shareTypePriority) : '未设置' }}
+          <mat-icon>https</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="priority-parent"
+        >
+        <table mat-table [dataSource]="dataSourceTypePrior" >
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef > 类型 </th>
+            <td mat-cell *matCellDef="let element" title="{{element}}"> {{ getI18n(element) }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef > 调整优先级 </th>
+            <td mat-cell *matCellDef="let element" title="调整优先级" >
+              <div class="move-actions">
+
+                <button mat-mini-fab mat-raised-button color="basic" aria-label="move top" (click)="movePriority(element, 'top')" >
+                  <mat-icon >publish</mat-icon>
+                </button>
+
+                <button mat-mini-fab mat-raised-button color="basic" aria-label="move up" (click)="movePriority(element, 'up')" class="move-up">
+                  <mat-icon >arrow_drop_up</mat-icon>
+                </button>
+
+                <button mat-mini-fab mat-raised-button color="basic" aria-label="move down" (click)="movePriority(element, 'down')" class="move-down">
+                  <mat-icon >arrow_drop_down</mat-icon>
+                </button>
+
+                <button mat-mini-fab mat-raised-button color="basic" aria-label="move bottom" (click)="movePriority(element, 'bottom')" >
+                  <mat-icon >file_download</mat-icon>
+                </button>
+
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsTypePrior"></tr>
+          <tr mat-row
+            *matRowDef="let row; columns: displayedColumnsTypePrior;"
+          ></tr>
+        </table>
+      </div>
+    </mat-expansion-panel>

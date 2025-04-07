@@ -1,0 +1,148 @@
+<div class="atConfig" *ngIf="atConfig">
+  <!--
+  <div class="config-name">
+    分享配置名称: {{ atConfig?.atConfigName }}
+  </div>
+  -->
+  <div class="share-ways">
+    <!--
+    <div class="share-way-weibo">
+      <div class="media-head">
+        <span>微博分享方式:</span>
+        <button mat-mini-fab mat-raised-button color="basic" aria-label="add-weibo"
+          [class.hide]="!onSubmit"
+          (click)="addAppShareConfig('WeiBo')">
+          <mat-icon >add</mat-icon>
+        </button>
+      </div>
+      <ng-container *ngFor="let WeiBo of atConfig.WeiBo; let i=index">
+        <mat-expansion-panel class="share-way-expansion-panel" *ngIf="i < 10000"
+           [expanded]="tmpData.openedPanel === WeiBo.appShareConfigId" (opened)="tmpData.openedPanel = WeiBo.appShareConfigId"
+          >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              微博分享配置{{ i + 1 }}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{ WeiBo?.isShare ? '启用' : '未启用' }}
+              <div class="at-map-action"
+                 [class.hide]="!onSubmit"
+                >
+                <mat-icon (click)="deleteATShareConfig($event, 'WeiBo', WeiBo.appShareConfigId)" title="删除该微博分享方式">delete</mat-icon>
+              </div>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="expansion-content"
+            >
+            <weibo-config [config]="WeiBo" [atConfigId]="atConfig.atConfigId" [atId]="atId" [onSubmit]="onSubmit"></weibo-config>
+          </div>
+        </mat-expansion-panel>
+      </ng-container>
+
+    </div>
+    -->
+    <div class="share-way-wechat">
+      <div class="media-head">
+        <span>微信公众号分享方式:</span>
+        <button mat-mini-fab mat-raised-button color="basic" aria-label="add-weibo"
+          [class.hide]="!onSubmit"
+          (click)="addAppShareConfig('WeChat')">
+          <mat-icon >add</mat-icon>
+        </button>
+      </div>
+      <ng-container *ngFor="let WeChat of atConfig.WeChat; let i=index">
+        <mat-expansion-panel class="share-way-expansion-panel" *ngIf="i < 10000"
+           [expanded]="tmpData.openedPanel === WeChat.appShareConfigId" (opened)="tmpData.openedPanel = WeChat.appShareConfigId"
+          >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              微信公众号分享配置{{ i + 1 }}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{ WeChat?.isShare ? '启用' : '未启用' }}
+              <div class="at-map-action"
+                [class.hide]="!onSubmit"
+                >
+                <mat-icon (click)="deleteATShareConfig($event, 'WeChat', WeChat.appShareConfigId)" title="删除该微信公众号分享方式">delete</mat-icon>
+              </div>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="expansion-content"
+            >
+            <wechat-config [config]="WeChat" [atConfigId]="atConfig.atConfigId" [atId]="atId" [onSubmit]="onSubmit"></wechat-config>
+          </div>
+        </mat-expansion-panel>
+      </ng-container>
+    </div>
+
+    <div class="share-way-wecom">
+      <div class="media-head">
+        <span>微信群分享方式:</span>
+        <button mat-mini-fab mat-raised-button color="basic" aria-label="add-weibo"
+          [class.hide]="!onSubmit"
+          (click)="addAppShareConfig('WeCom')">
+          <mat-icon >add</mat-icon>
+        </button>
+      </div>
+      <ng-container *ngFor="let WeCom of atConfig.WeCom; let i=index">
+        <mat-expansion-panel class="share-way-expansion-panel" *ngIf="i < 10000"
+           [expanded]="tmpData.openedPanel === WeCom.appShareConfigId" (opened)="tmpData.openedPanel = WeCom.appShareConfigId"
+          >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              微信群分享配置{{ i + 1 }}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{ WeCom?.isShare ? '启用' : '未启用' }}
+              <div class="at-map-action"
+                [class.hide]="!onSubmit"
+                >
+                <mat-icon (click)="deleteATShareConfig($event, 'WeCom', WeCom.appShareConfigId)" title="删除该微信群分享方式">delete</mat-icon>
+              </div>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="expansion-content"
+            >
+            <wecom-config [config]="WeCom" [atConfigId]="atConfig.atConfigId" [atId]="atId" [onSubmit]="onSubmit"></wecom-config>
+          </div>
+        </mat-expansion-panel>
+      </ng-container>
+    </div>
+
+    <!--
+    <div class="share-way-facebook">
+      <div class="media-head">
+        <span>脸书(Facebook)分享方式:</span>
+        <button mat-mini-fab mat-raised-button color="basic" aria-label="add-facebook"
+          [class.hide]="!onSubmit"
+          (click)="addAppShareConfig('Facebook')">
+          <mat-icon >add</mat-icon>
+        </button>
+      </div>
+      <ng-container *ngFor="let Facebook of atConfig.Facebook; let i=index">
+        <mat-expansion-panel class="share-way-expansion-panel" *ngIf="i < 10000"
+           [expanded]="tmpData.openedPanel === Facebook.appShareConfigId" (opened)="tmpData.openedPanel = Facebook.appShareConfigId"
+          >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              脸书分享配置{{ i + 1 }}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{ Facebook?.isShare ? '启用' : '未启用' }}
+              <div class="at-map-action"
+                [class.hide]="!onSubmit"
+                >
+                <mat-icon (click)="deleteATShareConfig($event, 'Facebook', Facebook.appShareConfigId)" title="删除该脸书分享方式">delete</mat-icon>
+              </div>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="expansion-content"
+            >
+            <facebook-config [config]="Facebook" [atConfigId]="atConfig.atConfigId" [atId]="atId" [onSubmit]="onSubmit"></facebook-config>
+          </div>
+        </mat-expansion-panel>
+      </ng-container>
+    </div>
+    -->
+  </div>
+</div>

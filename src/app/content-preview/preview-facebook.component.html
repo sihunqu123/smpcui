@@ -1,0 +1,240 @@
+<div class="content-preview preview-facebook">
+  <div class="preview-header-container">
+    <p class="preview-header"> 预览 </p>
+  </div>
+  <!--
+    <button mat-button (click)="printEnv()">test</button>
+  -->
+  <ng-container *ngFor="let item of rendered; let i = index;">
+    <ng-container>
+      <mat-divider
+        *ngIf="previewOption.isList || previewOption.currentIndex === i"
+        ></mat-divider>
+      <!--
+<mat-card class="preview-card">
+  <mat-card-header>
+    <div mat-card-avatar class="header-image"></div>
+    <mat-card-title>{{ displayName }}</mat-card-title>
+    <mat-card-subtitle>20秒以前 </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+      A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+      bred for hunting.
+    </p>
+  </mat-card-content>
+  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of your Icon">
+  <mat-card-actions class="blog-actions">
+    <button mat-button>收藏</button>
+    <button mat-button>转发</button>
+    <button mat-button>评论</button>
+    <button mat-button>赞</button>
+  </mat-card-actions>
+</mat-card>
+      -->
+      <div class="preview-conainer"
+        [class.display-none]="!previewOption.isList && previewOption.currentIndex !== i"
+        >
+        <div class="preview-info">
+          <span class="preview-summary"> {{item.header }} </span>
+          <span clas="preview-font">的预览如下: ( 第{{ i + 1 }}条 / 共{{ rendered.length }}条 ) </span>
+        </div>
+        <div class="preview-row header-title"
+          [class.double-column]="previewOption.isShowPC && previewOption.isShowMobile"
+          [class.single-column]="!previewOption.isShowPC || !previewOption.isShowMobile"
+          [class.reverse-column]="previewOption.isNeedReverse"
+          >
+          <span class="preview-column-left" *ngIf="previewOption.isShowPC"> 电脑端 </span>
+          <span class="preview-column-right" *ngIf="previewOption.isShowMobile">移动端</span>
+        </div>
+        <div class="preview-row"
+          [class.double-column]="previewOption.isShowPC && previewOption.isShowMobile"
+          [class.single-column]="!previewOption.isShowPC || !previewOption.isShowMobile"
+          [class.single-row]="!previewOption.isList"
+          [class.multi-row]="previewOption.isList"
+          [class.reverse-column]="previewOption.isNeedReverse"
+          >
+          <div class="preview-column-desktop" *ngIf="previewOption.isShowPC">
+            <mat-card class="facebook-card content-card">
+              <mat-card-header >
+                <div mat-card-avatar class="header-image"></div>
+                <mat-card-title>{{ displayName }}</mat-card-title>
+                <mat-card-subtitle>
+                  <span class="header-author">Published by auto-share-app</span>
+                  <span aria-hidden="true"> · </span>
+                  <span class="header-date">1h</span>
+                </mat-card-subtitle>
+                <mat-icon>more_horiz</mat-icon>
+              </mat-card-header>
+              <mat-card-content class="content">
+                <ng-container *ngFor="let textField of item.bodyTextFields; let j = index;">
+                  {{ textField.value }}<br>
+                </ng-container>
+                <div class="preview-images {{ item.imageClass }} "
+                  *ngIf="item.mediaFields && item.mediaFields.length > 0"
+                  >
+                  <ng-container *ngFor="let mediaField of item.mediaFields; let j = index;">
+                      <img class="preview-image facebook-content" src="{{ mediaField.value }}" *ngIf="mediaField.type === 'ImageComponent'" />
+
+                      <div class="preview-video facebook-content" *ngIf="mediaField.type === 'FileComponent' ">
+                        <video width="468px" height="282px" controls="">
+                          <source
+                            src="{{ mediaField.value }}"
+                            type="video/mp4"
+                            autoplay="true"
+                            poster="item.videoCoverField"
+                            preload="true"
+                            >
+                            你的浏览器不支持视频播放
+                        </video>
+                      </div>
+
+                      <!-- TODO: support link in Facebook
+                      <div class="preview-link" *ngIf="bodyField.type === 'LinkComponent' ">
+                        <a href="{{ item.bodyField.value.url }}">
+                          {{ bodyField.value.text || '原文链接' }}
+                        </a>
+                      </div>
+
+                      <div class="preview-richtext facebook-content" [innerHTML]="bodyField.value | safeHtml" *ngIf="['RichTextComponent'].includes(bodyField.type)" ></div>
+
+                      -->
+
+                  </ng-container>
+                  <div class="preview-more-cover" *ngIf="item.mediaFields && item.mediaFields.length > 4">
+                    +{{ item.mediaFields.length - 4 }}
+                  </div>
+                </div>
+              </mat-card-content>
+              <mat-card-actions class="blog-actions">
+                <!--
+                  TODO: tune icon later
+                -->
+                <button mat-icon-button aria-label="icon button">
+                  <mat-icon class="material-icons-outlined">thumb_up</mat-icon>Like
+                </button>
+                <button mat-icon-button aria-label="icon button">
+                  <mat-icon>chat_bubble_outline</mat-icon>Comment
+                </button>
+                <button mat-icon-button aria-label="icon button" class="reply-btn">
+                  <mat-icon class="material-icons-outlined">reply</mat-icon>Share
+                </button>
+              </mat-card-actions>
+              <div class="comment-section">
+                <div class="leave-comment">
+                  <div mat-card-avatar class="header-image comment-persona"></div>
+<!--
+-->
+                  <div class="comment-input">
+                    <input type="text" placeholder="Comment as {{ displayName }}">
+
+<!--
+-->
+                    <div class="input-action-icon">
+                      <span class="material-icons">
+                        sentiment_satisfied_alt
+                      </span>
+                      <span class="material-icons-outlined">
+                        photo_camera
+                      </span>
+                      <span class="material-icons-outlined">
+                        gif_box
+                      </span>
+                      <span class="material-icons-outlined">
+                        sticky_note_2
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="comment-enter-hint">
+                  Press Enter to post.
+                </div>
+              </div>
+            </mat-card>
+          </div>
+
+          <div class="preview-column-mobile" *ngIf="previewOption.isShowMobile">
+            <mat-card class="facebook-card content-card">
+              <mat-card-header >
+                <div mat-card-avatar class="header-image"></div>
+                <mat-card-title>{{ displayName }}</mat-card-title>
+                <mat-card-subtitle>
+                  <span class="header-date">1h</span>
+                </mat-card-subtitle>
+                <mat-icon>more_horiz</mat-icon>
+              </mat-card-header>
+              <mat-card-content class="content">
+                <ng-container *ngFor="let textField of item.bodyTextFields; let j = index;">
+                  {{ textField.value }}<br>
+                </ng-container>
+                <div class="preview-images {{ item.imageClass }} "
+                  *ngIf="item.mediaFields && item.mediaFields.length > 0"
+                  >
+                  <ng-container *ngFor="let mediaField of item.mediaFields; let j = index;">
+                      <img class="preview-image" src="{{ mediaField.value }}" *ngIf="mediaField.type === 'ImageComponent'" />
+
+                      <div class="preview-video facebook-content" *ngIf="mediaField.type === 'FileComponent' ">
+                        <video width="468px" height="282px" controls="">
+                          <source
+                            src="{{ mediaField.value }}"
+                            type="video/mp4"
+                            autoplay="true"
+                            poster="item.videoCoverField"
+                            preload="true"
+                            >
+                            你的浏览器不支持视频播放
+                        </video>
+                      </div>
+
+                      <!-- TODO: support link in Facebook
+                      <div class="preview-link" *ngIf="bodyField.type === 'LinkComponent' ">
+                        <a href="{{ item.bodyField.value.url }}">
+                          {{ bodyField.value.text || '原文链接' }}
+                        </a>
+                      </div>
+
+                      <div class="preview-richtext facebook-content" [innerHTML]="bodyField.value | safeHtml" *ngIf="['RichTextComponent'].includes(bodyField.type)" ></div>
+
+                      -->
+
+                  </ng-container>
+                  <div class="preview-more-cover" *ngIf="item.mediaFields && item.mediaFields.length > 4">
+                    +{{ item.mediaFields.length - 4 }}
+                  </div>
+                </div>
+                <div class="persona-divider">
+                  <div mat-card-avatar class="header-image"></div>
+                  <div mat-card-avatar class="header-image"></div>
+                </div>
+              </mat-card-content>
+              <mat-card-actions class="blog-actions">
+                <!--
+                  TODO: tune icon later
+                -->
+                <button mat-icon-button aria-label="icon button">
+                  <mat-icon class="material-icons-outlined">thumb_up</mat-icon>Like
+                </button>
+                <button mat-icon-button aria-label="icon button">
+                  <mat-icon>chat_bubble_outline</mat-icon>Comment
+                </button>
+                <button mat-icon-button aria-label="icon button" class="reply-btn">
+                  <mat-icon>reply</mat-icon>Share
+                </button>
+              </mat-card-actions>
+              <div class="comment-section">
+              </div>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+
+
+    </ng-container>
+  </ng-container>
+
+      <button mat-button (click)="printEnv()" *ngIf="isDebug">test</button>
+</div>
+
+
+

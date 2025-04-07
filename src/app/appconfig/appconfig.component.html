@@ -1,0 +1,108 @@
+<home activeId="appconfig">
+<ng-template #togglerContentTpl>
+  <div class="appconfig-container component-container">
+    <h1 class="component-title">{{ formData.value.configId ? '修改': '新建'}}社交媒体密钥配置</h1>
+    <mat-card class="appconfig-detail-card">
+      <mat-card-header >
+        <mat-card-title>社交媒体密钥详细配置</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="content">
+        <form [formGroup]="formData">
+          <mat-form-field appearance="outline" hideRequiredMarker="false" floatLabel="auto" hintLabel="最多20个字" >
+            <mat-label>配置名称</mat-label>
+            <input matInput maxlength="50" type="text" class="form-control" formControlName="name" placeholder="新建配置名" required>
+          </mat-form-field>
+
+
+          <div class="platform-radio">
+            <mat-label>社交平台:</mat-label>
+            <mat-radio-group class="form-control" formControlName="smpType" required #smpType>
+              <mat-radio-button value="WeChat">微信公众号</mat-radio-button>
+              <mat-radio-button value="WeCom">企业微信</mat-radio-button>
+              <!--
+              <mat-radio-button value="WeiBo">微博</mat-radio-button>
+              -->
+              <!--
+                TODO: The appconfig of Facebook need to save the appId and pageId.
+              <mat-radio-button value="Facebook">脸书(Facebook)</mat-radio-button>
+              -->
+            </mat-radio-group>
+          </div>
+
+          <mat-form-field appearance="outline" hideRequiredMarker="false" floatLabel="auto" >
+            <mat-label>应用公钥(appKey/appID)</mat-label>
+            <input matInput formControlName="appKey" required>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" hideRequiredMarker="false" floatLabel="auto" >
+            <mat-label>应用私钥(appSecret)</mat-label>
+            <input matInput [type]="hideSecret ? 'password' : 'text'" formControlName="appSecret" required>
+            <button mat-icon-button matSuffix (click)="hideSecret = !hideSecret" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideSecret">
+              <mat-icon>{{hideSecret ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" hideRequiredMarker="false" floatLabel="auto" >
+            <mat-label>回调链接</mat-label>
+            <input matInput formControlName="redirectURL" [required]="formData.value.smpType === 'WeiBo'">
+          </mat-form-field>
+
+          <ng-container *ngIf="formData.value.smpType === 'WeCom'">
+
+            <mat-form-field appearance="outline" hideRequiredMarker="false" floatLabel="auto" >
+              <mat-label>企业ID</mat-label>
+              <input matInput formControlName="corpId" [required]="formData.value.smpType === 'WeCom'">
+            </mat-form-field>
+
+            <div class="platform-radio" >
+              <mat-label>目标类型:</mat-label>
+              <mat-radio-group class="form-control" formControlName="toType"  [required]="formData.value.smpType === 'WeCom'" #toType>
+                <mat-radio-button value="toUser">用户</mat-radio-button>
+                <mat-radio-button value="toParty">部门</mat-radio-button>
+                <mat-radio-button value="toTag">标签</mat-radio-button>
+                <mat-radio-button value="chatId">群聊会话</mat-radio-button>
+              </mat-radio-group>
+            </div>
+
+            <mat-form-field appearance="outline" hideRequiredMarker="false" floatLabel="auto" >
+              <mat-label>目标IDs</mat-label>
+              <input matInput formControlName="toValue"  [required]="formData.value.smpType === 'WeCom'" placeholder="多个ID用“|”分隔">
+            </mat-form-field>
+
+          </ng-container>
+
+          <mat-form-field appearance="outline" hideRequiredMarker="false" floatLabel="auto" style="display: none;" >
+            <mat-label>ConfigId</mat-label>
+            <input matInput formControlName="configId" >
+          </mat-form-field>
+
+        </form>
+      </mat-card-content>
+      <mat-card-actions class="blog-actions">
+        <!-- TODO: implement the isRequired for WeCom later -->
+        <button mat-raised-button color="primary" (click)="onSubmit();" [disabled]="formData.invalid">保存并授权</button>
+      </mat-card-actions>
+    </mat-card>
+
+
+    <mat-card class="appconfig-enable-card">
+      <mat-card-header >
+        <mat-card-title>激活</mat-card-title>
+        <mat-card-subtitle>激活当前配置</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="content">
+        <div class="isEnable-radio">
+          <mat-slide-toggle labelPosition="before" [(ngModel)]="isEnabled" (change)="toggleEnable()">是否启用</mat-slide-toggle>
+        </div>
+      </mat-card-content>
+      <mat-card-actions class="blog-actions">
+      </mat-card-actions>
+    </mat-card>
+
+    <div class="page-action">
+      <button mat-button mat-stroked-button (click)="onCancel();" routerLink="/appconfig-list" >返回</button>
+    </div>
+
+  </div>
+</ng-template>
+</home>

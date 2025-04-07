@@ -1,0 +1,40 @@
+.atConfigs {
+  .panel-title-div {
+    .view-mode {
+      display: flex;
+      align-items: center;
+    }
+    .edit-mode {
+      display: flex;
+      align-items: center;
+
+    }
+  }
+
+  .atConfig-divider {
+    color: red;
+    margin: 30px 0;
+  }
+
+  .mat-expansion-panel-header-title {
+    flex-basis: 0;
+  }
+
+  .mat-expansion-panel-header-description {
+    flex-basis: 0;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .selected-row {
+    background-color: darkgray !important;
+    font-weight: bold;
+  }
+
+  .at-map-action {
+    gap: 5px;
+    display: flex;
+  }
+}
+
+

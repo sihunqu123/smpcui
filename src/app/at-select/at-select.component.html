@@ -1,0 +1,60 @@
+<div class="at-selection">
+  <form [formGroup]="formData">
+    <ng-template matStepLabel>选择编辑模板</ng-template>
+    <div class="at-seletion-body">
+      <mat-form-field class="at-search-form-field" appearance="fill">
+        <mat-label>请至少输入2个字来搜索模板</mat-label>
+        <input matInput type="text" [(ngModel)]="paginateArg.queryTxt" (keyup)="onSearchTxtChange($event)" [ngModelOptions]="{standalone: true}">
+        <button *ngIf="paginateArg.queryTxt" matSuffix mat-icon-button aria-label="Clear" (click)="paginateArg.queryTxt=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <table mat-table [dataSource]="dataSourceSearch"
+        matSort
+        #sortSearch="matSort"
+        (matSortChange)="changeSort($event)"
+        matSortActive="updated" matSortDirection="desc"
+        matSortDisableClear>
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> 标题 </th>
+          <td mat-cell *matCellDef="let element" title="{{element.title}}"> {{element.title}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> 名称 </th>
+          <td mat-cell *matCellDef="let element" title="{{element.name}}"> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="updated">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> 修改时间 </th>
+          <td mat-cell *matCellDef="let element" title="{{element.updated}}"> {{element.updated}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsSearch"></tr>
+        <tr mat-row
+          (click)="onSelectionChange(row, row.isDisabled)"
+          [class.row-is-selected]="selected === row"
+          [class.row-disabled]="row.isDisabled"
+          *matRowDef="let row; columns: displayedColumnsSearch;"
+        ></tr>
+      </table>
+      <!--
+        TODO: pagination for async
+      -->
+      <mat-paginator
+        #paginatorSearch
+        [length]="paginateArg.total"
+        [pageIndex]="paginateArg.page"
+        [pageSize]="paginateArg.pagesize"
+        [pageSizeOptions]="[5, 10, 20]"
+        (page)="pageChange($event)"
+        showFirstLastButtons></mat-paginator>
+    </div>
+  </form>
+  <!--
+    <button mat-button (click)="printEnv()">test</button>
+  -->
+<div>
+
+

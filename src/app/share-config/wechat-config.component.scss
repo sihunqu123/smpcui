@@ -1,0 +1,49 @@
+.wechat-config {
+  .config-form{
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+
+    .move-actions {
+      // display: flex;
+
+      .move-up,.move-down {
+        .mat-button-wrapper {
+          padding: 0;
+
+          mat-icon {
+            font-size: 35px;
+            font-weight: 900;
+            width: 35px;
+            height: 35px;
+          }
+        }
+      }
+    }
+
+    .map-parent {
+      > mat-form-field {
+        width: 100%;
+      }
+    }
+  }
+  .wechat-config-actions {
+    margin-top: 10px
+  }
+
+
+
+  .preview-tab-content {
+    margin: 0 10px;
+
+    .smpshare-content-actions {
+      margin: 10px 0;
+    }
+
+    .config-preview-actions {
+      margin: 10px 0;
+    }
+  }
+
+}
+

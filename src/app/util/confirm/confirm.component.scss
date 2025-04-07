@@ -1,0 +1,14 @@
+.dialog-confirm {
+
+  .mat-dialog-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+  }
+}
+
+.confirm-dialog-backdropClass {
+  background-color: dimgrey;
+  opacity: 50% !important;
+}
+

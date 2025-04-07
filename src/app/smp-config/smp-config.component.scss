@@ -1,0 +1,100 @@
+.smpconfig-container {
+//> form {
+//  display: flex;
+//  align-items: center;
+//  flex-direction: column;
+//  flex-direction: column;
+//  padding: 5px 10px;
+//  
+//  .isEnable-radio,.platform-radio {
+//    align-self: self-start;
+//  }
+//  .at-list {
+//    width: 100%;
+//  }
+//}
+
+  .at-result {
+    margin: 0 16px;
+
+    .smpconfig-at-actions {
+      margin: 10px 0px;
+      width: 100%;
+      margin: 10px 0px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      h3 {
+        display: inline;
+      }
+    }
+  }
+  
+  .smpconfig-actions {
+    align-self: self-start;
+  }
+
+  .config-enable-card {
+//    margin-top: 20px;
+  }
+
+
+}
+
+
+
+
+.smpconfig-container {
+  .appconfig-select-parent {
+    margin-top: 20px;
+  }
+
+  .step-action {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+  }
+}
+
+
+.mat-list-icon {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+
+.smpconfig-container .mat-form-field {
+  width: 100%;
+  display: block;
+}
+
+.smpconfig-container form {
+  margin-bottom: 20px;
+}
+
+.smpconfig-container form > * {
+  margin: 5px 0;
+}
+
+.smpconfig-container .mat-radio-button {
+  margin: 0 12px;
+}
+
+
+
+.smpconfig-right-align {
+  text-align: right;
+}
+
+input.smpconfig-right-align::-webkit-outer-spin-button,
+input.smpconfig-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.smpconfig-right-align {
+  -moz-appearance: textfield;
+}
+
+
+table {
+  width: 100%;
+}

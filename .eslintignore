@@ -1,0 +1,17 @@
+webpack.*.js
+jest.config.js
+babel.config.js
+/node_modules
+/build
+/dist
+/e2e
+/src/tmp.js
+/src/proxy.conf.js
+/src/index.js
+/src/app/smp-config
+/src/app/smp-config-list
+public/**/*.js
+public/**/*.properties
+src/serviceWorker.js
+
+
